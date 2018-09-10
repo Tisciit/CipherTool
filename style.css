@@ -58,7 +58,7 @@ html {
 }
 
 /* Desktop second */
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 768px) {
     .col-1 {
         width: 8.33%;
     }
