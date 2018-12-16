@@ -115,6 +115,25 @@ const CIPHERS = {
         parent.appendChild(key);
         parent.appendChild(input2);
     },
+
+    T9: function(){
+        let parent = clearParent();
+        let input1 = document.createElement("textarea");
+        let input2 = document.createElement("textarea");
+        input1.oninput = function () {
+            input2.value = Codes.T9(input1.value, OPERATIONS.ENCODE);
+            resizeControl([input1,input2]);
+        }
+
+        input2.oninput = function () {
+            input1.value = Codes.T9(input2.value, OPERATIONS.DECODE);
+            resizeControl([input1,input2]);
+        }
+
+        parent.appendChild(input1);
+        parent.appendChild(input2);
+
+    },
 }
 
 window.onload = function () {

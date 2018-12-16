@@ -248,6 +248,56 @@ class Codes {
     }
 
     /**
+     * This is basically not T9 but a old phone keyboard
+     * @param {String} text The text to Encode / Decode
+     * @param {Codes.OPERATIONS} operation Encode or Decode 
+     */
+    static T9(text, operation) {
+
+        const KEYPAD = {
+            "1": ".,1",
+            "2": "ABC2",
+            "3": "DEF3",
+            "4": "GHI4",
+            "5": "JKL5",
+            "6": "MNO6",
+            "7": "PQRS7",
+            "8": "TUV8",
+            "9": "WXYZ9",
+            "0": " 0",
+            "#": "",
+            "*": ""
+        }
+
+        let out = "";
+
+        if (operation == OPERATIONS.ENCODE) {
+            for (let c of text) {
+                for (let k of Object.getOwnPropertyNames(KEYPAD)) {
+                    let string = KEYPAD[k];
+                    let index = string.indexOf(c.toUpperCase());
+                    if (index >= 0) {
+                        console.log("found at " + index);
+                        for (let i = 0; i <= index; i++) {
+                            out += k;
+                        }
+                        out += " ";
+                        break;
+                    }
+                }
+            }
+        } else {
+            let codes = text.split(" ");
+
+            for (let code of codes) {
+                out += KEYPAD[code[0]][code.length - 1];
+            }
+        }
+
+        return out;
+    }
+
+    /**
      * Return the correct Boundary for the given Sign
      * @param {String} sign The sign to get the boundary of.
      * @returns {Codes.Boundaries} The correct boundary for the given sign. Will return undefined if no boundary found.
